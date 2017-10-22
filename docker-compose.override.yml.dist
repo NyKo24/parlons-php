@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+    app:
+        volumes:
+            - "~/.composer:/root/.composer"
+        ports:
+            - "9000:80"
+
+    db:
+        ports:
+            - "3306:3306"
+
+    pma:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - "9080:80"
